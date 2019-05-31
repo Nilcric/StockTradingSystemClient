@@ -40,6 +40,10 @@
       <i class="el-icon-key"/>
       <span slot="title">修改密码</span>
     </el-menu-item>
+    <el-menu-item index="SetTransactionPasswd">
+      <i class="el-icon-key"/>
+      <span slot="title">修改交易密码</span>
+    </el-menu-item>
   </el-menu>
 </template>
 

@@ -5,6 +5,9 @@
       <router-link to="Login">
         <el-button to="Login">登录</el-button>
       </router-link>
+      <router-link to="OpenAccount">
+        <el-button to="OpenAccount">开户</el-button>
+      </router-link>
     </div>
   </div>
 </template>

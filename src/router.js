@@ -23,6 +23,11 @@ export default new Router({
             component: () => import('./views/Login')
         },
         {
+            path: "/OpenAccount",
+            name: "OpenAccount",
+            component: () => import('./views/OpenAccount')
+        },
+        {
             path: "/Stock",
             name: "Stock",
             component: () => import('./views/Stock')
@@ -61,6 +66,11 @@ export default new Router({
             path: "/Setting",
             name: "Setting",
             component: () => import('./views/Setting')
+        },
+        {
+            path: "/SetTransactionPasswd",
+            name: "SetTransactionPasswd",
+            component: () => import('./views/SetTransactionPasswd')
         },
     ]
 })

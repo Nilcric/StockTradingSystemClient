@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "Setting",
+  name: "SetTransactionPasswd",
   data() {
     return {
       form: {
