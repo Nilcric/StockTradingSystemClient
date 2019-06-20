@@ -20,8 +20,8 @@ export default {
 
 <style>
 .header-container {
-  color: #409eff;
-  background-color: #ffffff;
+  color: #fff;
+  background-color: #545c64;
   display: flex;
   align-items: center;
   padding: 0 16px;

@@ -78,4 +78,8 @@ p {
   padding: 64px 0 0 256px;
   margin: 16px;
 }
+
+body {
+  background-color: rgb(233, 233, 235);
+}
 </style>
