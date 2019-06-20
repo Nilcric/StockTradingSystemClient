@@ -58,7 +58,7 @@ export default new Router({
             component: () => import('./views/Command')
         },
         {
-            path: "/Result",
+            path: "/Result/:id",
             name: "Result",
             component: () => import('./views/Result')
         },

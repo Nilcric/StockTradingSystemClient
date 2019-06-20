@@ -12,7 +12,7 @@
         <el-input v-model="form.amount"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">购买</el-button>
+        <el-button type="primary" @click="onSubmit">购买</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import server from "@/functions/server";
 export default {
   name: "Buy",
   data() {
@@ -30,6 +31,22 @@ export default {
         amount: null
       }
     };
+  },
+  methods: {
+    onSubmit() {
+      let self = this;
+      server.buy(
+        {
+          id: this.id,
+          price: this.price,
+          amount: this.amount
+        },
+        function(response) {
+          self.$router.push("Result/" + response["commandID"]);
+        },
+        function(response) {}
+      );
+    }
   }
 };
 </script>
