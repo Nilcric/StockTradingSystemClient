@@ -22,21 +22,21 @@
         <i class="el-icon-s-marketing"></i>
         <span>股票信息</span>
       </template>
-      <el-menu-item index="Search">
+      <el-menu-item index="/Search">
         <i class="el-icon-search"/>
         <span slot="title">查询股票</span>
       </el-menu-item>
-      <el-menu-item index="Buy">
+      <el-menu-item index="/Buy">
         <i class="el-icon-shopping-cart-2"/>
         <span slot="title">购买股票</span>
       </el-menu-item>
-      <el-menu-item index="Sell">
+      <el-menu-item index="/Sell">
         <i class="el-icon-sold-out"/>
         <span slot="title">出售股票</span>
       </el-menu-item>
     </el-submenu>
 
-    <el-menu-item index="Command">
+    <el-menu-item index="/Command">
       <i class="el-icon-s-order"/>
       <span slot="title">交易信息</span>
     </el-menu-item>
@@ -61,15 +61,15 @@
         <i class="el-icon-s-tools"></i>
         <span>设置</span>
       </template>
-      <el-menu-item index="Alert">
+      <el-menu-item index="/Alert">
         <i class="el-icon-message-solid"/>
         <span slot="title">设置提醒</span>
       </el-menu-item>
-      <el-menu-item index="Setting">
+      <el-menu-item index="/Setting">
         <i class="el-icon-key"/>
         <span slot="title">修改密码</span>
       </el-menu-item>
-      <el-menu-item index="SetTransactionPasswd">
+      <el-menu-item index="/SetTransactionPasswd">
         <i class="el-icon-key"/>
         <span slot="title">修改交易密码</span>
       </el-menu-item>

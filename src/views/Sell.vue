@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       form: {
-        id: null,
+        id: this.$route.params.id,
         price: null,
         amount: null
       }

@@ -43,6 +43,13 @@ p {
   padding: 0.5em 0;
 }
 
+.el-notification {
+  h2,
+  p {
+    padding: 0;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

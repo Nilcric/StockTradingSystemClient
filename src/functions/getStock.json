@@ -1,0 +1,9 @@
+{
+    "stockid": 123456,
+    "name": "测试股票",
+    "price": 7.89,
+    "status": true,
+    "limitup": 10,
+    "limitdown": 5,
+    "announcement": "公告"
+}

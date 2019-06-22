@@ -43,8 +43,18 @@ export default new Router({
             component: () => import('./views/Buy')
         },
         {
+            path: "/Buy/:id",
+            name: "BuyByID",
+            component: () => import('./views/Buy')
+        },
+        {
             path: "/Sell",
             name: "Sell",
+            component: () => import('./views/Sell')
+        },
+        {
+            path: "/Sell/:id",
+            name: "SellByID",
             component: () => import('./views/Sell')
         },
         {
@@ -56,11 +66,6 @@ export default new Router({
             path: "/Command",
             name: "Command",
             component: () => import('./views/Command')
-        },
-        {
-            path: "/Result/:id",
-            name: "Result",
-            component: () => import('./views/Result')
         },
         {
             path: "/Setting",

@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       form: {
-        id: null,
+        id: this.$route.params.id,
         price: null,
         amount: null
       }
@@ -34,17 +34,29 @@ export default {
   },
   methods: {
     onSubmit() {
-      let self = this;
-      server.buy(
+      server.sendCommand(
         {
+          type: true,
           id: this.id,
           price: this.price,
           amount: this.amount
         },
-        function(response) {
-          self.$router.push("Result/" + response["commandID"]);
+        data => {
+          this.$router.push("Command");
+          this.$notify({
+            title: "发送购买指令成功",
+            type: "success",
+            offset: 64
+          });
         },
-        function(response) {}
+        data => {
+          this.$notify({
+            title: "发送购买指令失败",
+            message: data,
+            type: "error",
+            offset: 64
+          });
+        }
       );
     }
   }
