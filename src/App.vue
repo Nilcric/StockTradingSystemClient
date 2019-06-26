@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div v-if="authenticated" id="app">
     <div class="view">
       <router-view/>
     </div>
@@ -10,17 +10,38 @@
       <Header/>
     </div>
   </div>
+
+  <div v-else>
+    <div class="login-view">
+      <Login/>
+    </div>
+    <div class="header">
+      <Header/>
+    </div>
+  </div>
 </template>
 
 <script>
 import Nav from "./components/Nav";
 import Header from "./components/Header";
+import Login from "./views/Login";
 
 export default {
   name: "app",
   components: {
     Nav,
-    Header
+    Header,
+    Login
+  },
+  data() {
+    return {
+      authenticated: false
+    };
+  },
+  mounted() {
+    this.$root.$on("login", () => {
+      this.authenticated = true;
+    });
   }
 };
 </script>
@@ -83,6 +104,11 @@ p {
 
 .view {
   padding: 64px 0 0 256px;
+  margin: 16px;
+}
+
+.login-view {
+  padding: 64px 0 0 0;
   margin: 16px;
 }
 

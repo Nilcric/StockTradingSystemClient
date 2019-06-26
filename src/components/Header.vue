@@ -2,19 +2,28 @@
   <div class="header-container">
     <div class="header-item">股票交易系统 - 交易客户端</div>
     <div class="header-item header-item-right">
-      <router-link to="Login">
+      <span v-if="username">
+        <i class="el-icon-user"/>
+        {{username}}
+      </span>
+      <!--router-link to="Login">
         <el-button to="Login">登录</el-button>
       </router-link>
       <router-link to="OpenAccount">
         <el-button to="OpenAccount">开户</el-button>
-      </router-link>
+      </router-link-->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data() {
+    return {
+      username: localStorage["username"]
+    };
+  }
 };
 </script>
 

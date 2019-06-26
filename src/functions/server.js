@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const accountServer = '/';
+const accountServer = 'http://47.97.74.128:443/';
 const stockServer = '/';
 
 const log = function (...text) {
@@ -9,19 +9,22 @@ const log = function (...text) {
 }
 
 const login = function (username, password, success, failure) {
-    let accessToken = username + password;
-
-    localStorage['username'] = username;
-    localStorage['accessToken'] = accessToken;
-
-    if (1) {
-        log('Login', 'Success');
-        success(accessToken);
-    }
-    else {
-        log('Login', 'Failure');
-        failure(404);
-    }
+    axios.post(accountServer + 'security/login', {
+        id: username,
+        password: password,
+    }).then(response => {
+        if (1) {
+            success({
+                error_code: 0
+            });
+        }
+        else if (response.data.error_code === 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data);
+        }
+    })
 }
 
 const getStock = function (data, success, failure) {
@@ -129,6 +132,7 @@ const revokeCommand = function (data, success, failure) {
 }
 
 export default {
+    login,
     getStock,
     getStocks,
     getCommand,
