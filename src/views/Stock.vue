@@ -33,7 +33,8 @@ export default {
   },
   mounted() {
     let self = this;
-    server.getStocks(
+    server.getMyStocks(
+      {},
       function(response) {
         self.tableData = response;
       },

@@ -6,5 +6,15 @@
     "type": false,
     "userid": "CircleLin",
     "time": "2019.5.30 23:45:15",
-    "state": 2
+    "state": 2,
+    "records": [
+        {
+            "amount": 30,
+            "price": 1.36
+        },
+        {
+            "amount": 50,
+            "price": 1.32
+        }
+    ]
 }

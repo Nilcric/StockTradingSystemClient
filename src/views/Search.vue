@@ -19,7 +19,21 @@
     </el-table>
 
     <el-dialog title="股票详情" :visible.sync="showDialog" :before-close="onCloseDialog">
-      <span>{{selected}}</span>
+      <el-form v-if="selected" ref="form" :model="selected" label-width="120px" class="table-info">
+        <el-form-item label="股票">
+          <span>{{selected.stockid}} {{selected.name}}</span>
+        </el-form-item>
+        <el-form-item label="价格">
+          <span>{{selected.price}}</span>
+        </el-form-item>
+        <el-form-item label="状态">
+          <span>{{selected.status ? '正常' : '暂停'}}</span>
+        </el-form-item>
+        <el-form-item label="公告">
+          <span>{{selected.announcement}}</span>
+        </el-form-item>
+      </el-form>
+
       <span slot="footer" class="dialog-footer">
         <el-button @click="onCloseDialog">取消</el-button>
         <el-button @click="onBuy" type="primary">购买股票</el-button>
@@ -76,7 +90,9 @@ export default {
     },
     onCloseDialog() {
       this.showDialog = false;
-      this.$refs.table.setCurrentRow();
+      setTimeout(() => {
+        this.$refs.table.setCurrentRow();
+      }, 500);
     },
     onBuy() {
       this.$router.push("Buy/" + this.selected.stockid);
@@ -87,3 +103,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.table-info label {
+  color: #99a9bf;
+}
+</style>
