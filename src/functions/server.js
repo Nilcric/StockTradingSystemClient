@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const accountServer = 'http://47.97.74.128:443/';
-const stockServer = '/';
+const stockServer = 'http://q.xiexun.tech:8877/';
 
 const log = function (...text) {
     // eslint-disable-next-line
@@ -33,10 +33,10 @@ const getStock = function (data, success, failure) {
         stockid: data.id
     }).then(response => {
         if (response.data.successful) {
-            success(response.data.data);
+            // success(response.data.data);
         }
         else {
-            failure(response.data.data);
+            // failure(response.data.data);
         }
     })
     success(require('./getStock.json'));
@@ -50,10 +50,10 @@ const getStocks = function (data, success, failure) {
         to: data.to
     }).then(response => {
         if (response.data.successful) {
-            success(response.data.data);
+            // success(response.data.data);
         }
         else {
-            failure(response.data.data);
+            // failure(response.data.data);
         }
     })
     if (Math.random() > 0.1) {

@@ -10,12 +10,12 @@
     <el-table ref="table" :data="tableData" highlight-current-row @current-change="onClick">
       <el-table-column prop="stockid" label="股票代码"/>
       <el-table-column prop="name" label="股票名称"/>
-      <el-table-column prop="price" label="最新"/>
-      <el-table-column prop="buy" label="购买"/>
-      <el-table-column prop="sell" label="出售"/>
-      <el-table-column prop="day" label="当日成交"/>
-      <el-table-column prop="week" label="本周成交"/>
-      <el-table-column prop="month" label="本月成交"/>
+      <el-table-column prop="price" label="最新价"/>
+      <el-table-column prop="highest_buy_price" label="购买价"/>
+      <el-table-column prop="lowest_sell_price" label="出售价"/>
+      <el-table-column label="状态">
+        <template slot-scope="scope">{{scope.row.status ? '正常' : '暂停'}}</template>
+      </el-table-column>
     </el-table>
 
     <el-dialog title="股票详情" :visible.sync="showDialog" :before-close="onCloseDialog">
@@ -29,10 +29,27 @@
         <el-form-item label="状态">
           <span>{{selected.status ? '正常' : '暂停'}}</span>
         </el-form-item>
+        <el-form-item label="购买最高价">
+          <span>{{selected.highest_buy_price}}</span>
+        </el-form-item>
+        <el-form-item label="出售最低价">
+          <span>{{selected.lowest_sell_price}}</span>
+        </el-form-item>
+        <el-form-item label="本日成交价">
+          <span>{{selected.lowest_price}} ~ {{selected.highest_price}}</span>
+        </el-form-item>
+        <el-form-item label="本周成交价">
+          <span>{{selected.lowest_price_week}} ~ {{selected.highest_price_week}}</span>
+        </el-form-item>
+        <el-form-item label="本月成交价">
+          <span>{{selected.lowest_price_month}} ~ {{selected.highest_price_month}}</span>
+        </el-form-item>
         <el-form-item label="公告">
           <span>{{selected.announcement}}</span>
         </el-form-item>
       </el-form>
+
+      <span>{{selected}}</span>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="onCloseDialog">取消</el-button>
