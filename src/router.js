@@ -72,11 +72,6 @@ export default new Router({
             component: () => import('./views/Setting')
         },
         {
-            path: "/SetTransactionPasswd",
-            name: "SetTransactionPasswd",
-            component: () => import('./views/SetTransactionPasswd')
-        },
-        {
             path: "/Alert",
             name: "Alert",
             component: () => import('./views/Alert')

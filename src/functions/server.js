@@ -24,7 +24,7 @@ const login = function (username, password, success, failure) {
 
 const getStock = function (data, success, failure) {
     axios.post(stockServer + 'stockinfo', {
-        auth: localStorage['accessToken'],
+        auth: null,
         stockid: data.id
     }).then(response => {
         if (response.data.successful) {
@@ -39,7 +39,7 @@ const getStock = function (data, success, failure) {
 
 const getStocks = function (data, success, failure) {
     axios.post(stockServer + 'stocklist', {
-        auth: localStorage['accessToken'],
+        auth: null,
         name: data.name,
         from: data.from,
         to: data.to
@@ -62,7 +62,7 @@ const getStocks = function (data, success, failure) {
 
 const getCommand = function (data, success, failure) {
     axios.post(stockServer + 'instinfo', {
-        auth: localStorage['accessToken'],
+        auth: null,
         instid: data['commandID'],
         userid: localStorage['username']
     }).then(response => {
@@ -78,7 +78,7 @@ const getCommand = function (data, success, failure) {
 
 const getCommands = function (data, success, failure) {
     axios.post(stockServer + 'userinst', {
-        auth: localStorage['accessToken'],
+        auth: null,
         userid: localStorage['username']
     }).then(response => {
         if (response.data.successful) {
@@ -93,7 +93,11 @@ const getCommands = function (data, success, failure) {
 
 const sendCommand = function (data, success, failure) {
     axios.post(stockServer + 'instrequest', {
-        auth: localStorage['accessToken'],
+        auth: {
+            securityid: localStorage['username'],
+            financeid: data.finance,
+            password: data.password
+        },
         userid: localStorage['username'],
         type: data.type,
         stockid: data.id,
@@ -112,7 +116,7 @@ const sendCommand = function (data, success, failure) {
 
 const revokeCommand = function (data, success, failure) {
     axios.post(stockServer + 'instrequest', {
-        auth: localStorage['accessToken'],
+        auth: null,
         instid: data.commandID,
         userid: localStorage['username']
     }).then(response => {
@@ -128,7 +132,7 @@ const revokeCommand = function (data, success, failure) {
 
 const getMyStocks = function (data, success, failure) {
     axios.post(accountServer + 'security/securities_list', {
-        auth: localStorage['accessToken'],
+        auth: null,
         id: localStorage['username']
     }).then(response => {
         if (response.data.error_code == 0) {
@@ -142,7 +146,7 @@ const getMyStocks = function (data, success, failure) {
 
 const getMyFinances = function (data, success, failure) {
     axios.post(accountServer + 'security/finance_accounts_list', {
-        auth: localStorage['accessToken'],
+        auth: null,
         id: localStorage['username']
     }).then(response => {
         if (response.data.error_code == 0) {
