@@ -65,10 +65,6 @@
         <i class="el-icon-message-solid" />
         <span slot="title">设置提醒</span>
       </el-menu-item>
-      <el-menu-item index="/Setting">
-        <i class="el-icon-key" />
-        <span slot="title">修改密码</span>
-      </el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

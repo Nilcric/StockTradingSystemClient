@@ -11,11 +11,6 @@
       <el-form-item label="购买数量">
         <el-input v-model="form.amount" />
       </el-form-item>
-      <el-form-item label="资金账户">
-        <el-select v-model="form.account" placeholder="请选择" style="width: 100%">
-          <el-option v-for="account in accounts" :key="account" :label="account" :value="account" />
-        </el-select>
-      </el-form-item>
       <el-form-item label="交易密码">
         <el-input v-model="form.password" show-password />
       </el-form-item>
@@ -51,7 +46,6 @@ export default {
           id: this.form.id,
           price: this.form.price,
           amount: this.form.amount,
-          finance: this.form.account,
           password: this.form.password
         },
         data => {
@@ -72,22 +66,6 @@ export default {
         }
       );
     }
-  },
-  mounted() {
-    server.getMyFinances(
-      {},
-      data => {
-        this.accounts = data;
-      },
-      data => {
-        this.$notify({
-          title: "获得资金账户列表失败",
-          message: data,
-          type: "error",
-          offset: 64
-        });
-      }
-    );
   }
 };
 </script>

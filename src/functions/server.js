@@ -1,10 +1,11 @@
 import axios from 'axios';
+import qs from 'qs';
 
 const accountServer = 'http://47.97.74.128:8080/';
 const stockServer = 'http://q.xiexun.tech:8877/';
 
 const login = function (username, password, success, failure) {
-    axios.post(accountServer + 'security/login', {
+    axios.post(accountServer + 'finance/login', {
         id: username,
         password: password,
     }).then(response => {
@@ -18,10 +19,10 @@ const login = function (username, password, success, failure) {
 }
 
 const getStock = function (data, success, failure) {
-    axios.post(stockServer + 'stockinfo', {
+    axios.post(stockServer + 'stockinfo', qs.stringify({
         auth: null,
         stockid: data.id
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -32,12 +33,12 @@ const getStock = function (data, success, failure) {
 }
 
 const getStocks = function (data, success, failure) {
-    axios.post(stockServer + 'stocklist', {
-        auth: null,
+    axios.post(stockServer + 'stocklist', qs.stringify({
+        auth: "",
         name: data.name,
         from: data.from,
         to: data.to
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -49,11 +50,11 @@ const getStocks = function (data, success, failure) {
 
 
 const getCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instinfo', {
+    axios.post(stockServer + 'instinfo', qs.stringify({
         auth: null,
         instid: data['commandID'],
         userid: localStorage['username']
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -64,10 +65,10 @@ const getCommand = function (data, success, failure) {
 }
 
 const getCommands = function (data, success, failure) {
-    axios.post(stockServer + 'userinst', {
+    axios.post(stockServer + 'userinst', qs.stringify({
         auth: null,
         userid: localStorage['username']
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -78,7 +79,7 @@ const getCommands = function (data, success, failure) {
 }
 
 const sendCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instrequest', {
+    axios.post(stockServer + 'instrequest', qs.stringify({
         auth: {
             securityid: localStorage['username'],
             financeid: data.finance,
@@ -89,7 +90,7 @@ const sendCommand = function (data, success, failure) {
         stockid: data.id,
         amount: data.amount,
         price: data.price
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -100,11 +101,11 @@ const sendCommand = function (data, success, failure) {
 }
 
 const revokeCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instrequest', {
+    axios.post(stockServer + 'instrequest', qs.stringify({
         auth: null,
         instid: data.commandID,
         userid: localStorage['username']
-    }).then(response => {
+    })).then(response => {
         if (response.data.successful) {
             success(response.data.data);
         }
@@ -143,7 +144,7 @@ const getMyFinances = function (data, success, failure) {
 }
 
 const getMyInfo = function (data, success, failure) {
-    axios.post(accountServer + 'security/query_id', {
+    axios.post(accountServer + 'finance/query_id', {
         id: localStorage['username']
     }).then(response => {
         if (response.data.error_code == 0) {
@@ -184,7 +185,7 @@ const getFinance = function (data, success, failure) {
 
 const setFinancePassword = function (data, success, failure) {
     axios.post(accountServer + 'finance/set_password', {
-        id: data.id,
+        id: localStorage['username'],
         new_password: data.passwd
     }).then(response => {
         if (response.data.error_code == 0) {
