@@ -1,22 +1,22 @@
 <template>
   <div v-if="authenticated" id="app">
     <div class="view">
-      <router-view/>
+      <router-view />
     </div>
     <div class="nav">
-      <Nav id="nav"/>
+      <Nav id="nav" />
     </div>
     <div class="header">
-      <Header/>
+      <Header />
     </div>
   </div>
 
   <div v-else>
     <div class="login-view">
-      <Login/>
+      <Login />
     </div>
     <div class="header">
-      <Header/>
+      <Header />
     </div>
   </div>
 </template>
@@ -41,6 +41,10 @@ export default {
   mounted() {
     this.$root.$on("login", () => {
       this.authenticated = true;
+    });
+    this.$root.$on("logout", () => {
+      localStorage["username"] = "";
+      this.authenticated = false;
     });
   }
 };

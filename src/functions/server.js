@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const accountServer = 'http://47.97.74.128:443/';
+const accountServer = 'http://47.97.74.128:8080/';
 const stockServer = 'http://q.xiexun.tech:8877/';
 
 const log = function (...text) {
@@ -13,12 +13,7 @@ const login = function (username, password, success, failure) {
         id: username,
         password: password,
     }).then(response => {
-        if (1) {
-            success({
-                error_code: 0
-            });
-        }
-        else if (response.data.error_code === 0) {
+        if (response.data.error_code === 0) {
             success(response.data);
         }
         else {
@@ -131,6 +126,103 @@ const revokeCommand = function (data, success, failure) {
     success(true);
 }
 
+const getMyStocks = function (data, success, failure) {
+    axios.post(accountServer + 'security/securities_list', {
+        auth: localStorage['accessToken'],
+        id: localStorage['username']
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data.results);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const getMyFinances = function (data, success, failure) {
+    axios.post(accountServer + 'security/finance_accounts_list', {
+        auth: localStorage['accessToken'],
+        id: localStorage['username']
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data.results);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const getMyInfo = function (data, success, failure) {
+    axios.post(accountServer + 'security/query_id', {
+        id: localStorage['username']
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const loginFinance = function (data, success, failure) {
+    axios.post(accountServer + 'finance/login', {
+        id: data.id,
+        password: data.password
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const getFinance = function (data, success, failure) {
+    axios.post(accountServer + 'finance/query_id', {
+        id: data.id,
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const setFinancePassword = function (data, success, failure) {
+    axios.post(accountServer + 'finance/set_password', {
+        id: data.id,
+        new_password: data.passwd
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
+const setFinanceTransactionPassword = function (data, success, failure) {
+    axios.post(accountServer + 'finance/set_transaction_password', {
+        id: data.id,
+        transaction_password: data.passwd0,
+        new_transaction_password: data.passwd,
+    }).then(response => {
+        if (response.data.error_code == 0) {
+            success(response.data);
+        }
+        else {
+            failure(response.data.error_code);
+        }
+    })
+}
+
 export default {
     login,
     getStock,
@@ -139,4 +231,11 @@ export default {
     getCommands,
     sendCommand,
     revokeCommand,
+    getMyStocks,
+    getMyInfo,
+    getMyFinances,
+    loginFinance,
+    getFinance,
+    setFinancePassword,
+    setFinanceTransactionPassword
 };

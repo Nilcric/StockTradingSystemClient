@@ -3,8 +3,9 @@
     <div class="header-item">股票交易系统 - 交易客户端</div>
     <div class="header-item header-item-right">
       <span v-if="username">
-        <i class="el-icon-user"/>
+        <i class="el-icon-user" />
         {{username}}
+        <el-button type="info" @click="onLogout">退出登录</el-button>
       </span>
       <!--router-link to="Login">
         <el-button to="Login">登录</el-button>
@@ -23,6 +24,11 @@ export default {
     return {
       username: localStorage["username"]
     };
+  },
+  methods: {
+    onLogout() {
+      this.$root.$emit("logout");
+    }
   }
 };
 </script>

@@ -9,8 +9,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'HelloWorld',
-            component: () => import('./views/HelloWorld')
+            redirect: "/Home",
         },
         {
             path: "/Home",

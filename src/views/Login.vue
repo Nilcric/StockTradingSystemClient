@@ -4,10 +4,10 @@
       <el-col :span="12" :offset="4">
         <el-form ref="form" :model="form" label-width="96px">
           <el-form-item label="用户名">
-            <el-input v-model="form.name"/>
+            <el-input v-model="form.name" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="form.pass" show-password/>
+            <el-input v-model="form.pass" show-password />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">登录</el-button>
@@ -58,7 +58,21 @@ export default {
     }
   },
   mounted() {
-    localStorage["username"] = "";
+    server.getMyInfo(
+      {},
+      data => {
+        this.$root.$emit("login");
+        this.$router.push("/");
+        this.$notify({
+          title: "登录成功",
+          type: "success",
+          offset: 64
+        });
+      },
+      data => {
+        localStorage["username"] = "";
+      }
+    );
   }
 };
 </script>

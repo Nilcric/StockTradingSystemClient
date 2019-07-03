@@ -2,17 +2,17 @@
   <div>
     <h1>查询股票</h1>
     <el-input placeholder="请输入股票名称或代码" v-model="keyword">
-      <el-button slot="append" icon="el-icon-search" @click="onSubmit"/>
+      <el-button slot="append" icon="el-icon-search" @click="onSubmit" />
     </el-input>
 
-    <el-divider/>
+    <el-divider />
 
     <el-table ref="table" :data="tableData" highlight-current-row @current-change="onClick">
-      <el-table-column prop="stockid" label="股票代码"/>
-      <el-table-column prop="name" label="股票名称"/>
-      <el-table-column prop="price" label="最新价"/>
-      <el-table-column prop="highest_buy_price" label="购买价"/>
-      <el-table-column prop="lowest_sell_price" label="出售价"/>
+      <el-table-column prop="stockid" label="股票代码" />
+      <el-table-column prop="name" label="股票名称" />
+      <el-table-column prop="price" label="最新价" />
+      <el-table-column prop="highest_buy_price" label="购买价" />
+      <el-table-column prop="lowest_sell_price" label="出售价" />
       <el-table-column label="状态">
         <template slot-scope="scope">{{scope.row.status ? '正常' : '暂停'}}</template>
       </el-table-column>
@@ -112,7 +112,7 @@ export default {
       }, 500);
     },
     onBuy() {
-      this.$router.push("Buy/" + this.selected.stockid);
+      this.$router.push("/Buy/" + this.selected.stockid);
     }
   },
   mounted() {
