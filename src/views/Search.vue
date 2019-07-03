@@ -49,8 +49,6 @@
         </el-form-item>
       </el-form>
 
-      <span>{{selected}}</span>
-
       <span slot="footer" class="dialog-footer">
         <el-button @click="onCloseDialog">取消</el-button>
         <el-button @click="onBuy" type="primary">购买股票</el-button>
@@ -82,7 +80,7 @@ export default {
           to: (this.page + 1) * this.perpage
         },
         data => {
-          this.tableData = data.infos;
+          this.tableData = data.infos.filter(x => x);
           this.$notify({
             title: "获取股票列表成功",
             type: "success",

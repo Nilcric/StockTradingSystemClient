@@ -19,7 +19,7 @@ const login = function (username, password, success, failure) {
 }
 
 const getStock = function (data, success, failure) {
-    axios.post(stockServer + 'stockinfo', qs.stringify({
+    axios.post(stockServer + 'stockinfo', JSON.stringify({
         auth: null,
         stockid: data.id
     })).then(response => {
@@ -33,13 +33,14 @@ const getStock = function (data, success, failure) {
 }
 
 const getStocks = function (data, success, failure) {
-    axios.post(stockServer + 'stocklist', qs.stringify({
-        auth: "",
+    axios.post(stockServer + 'stocklist', JSON.stringify({
+        auth: null,
         name: data.name,
         from: data.from,
         to: data.to
     })).then(response => {
         if (response.data.successful) {
+            console.log(response.data.data);
             success(response.data.data);
         }
         else {
@@ -48,9 +49,8 @@ const getStocks = function (data, success, failure) {
     })
 }
 
-
 const getCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instinfo', qs.stringify({
+    axios.post(stockServer + 'instinfo', JSON.stringify({
         auth: null,
         instid: data['commandID'],
         userid: localStorage['username']
@@ -65,7 +65,7 @@ const getCommand = function (data, success, failure) {
 }
 
 const getCommands = function (data, success, failure) {
-    axios.post(stockServer + 'userinst', qs.stringify({
+    axios.post(stockServer + 'userinst', JSON.stringify({
         auth: null,
         userid: localStorage['username']
     })).then(response => {
@@ -79,10 +79,9 @@ const getCommands = function (data, success, failure) {
 }
 
 const sendCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instrequest', qs.stringify({
+    axios.post(stockServer + 'instrequest', JSON.stringify({
         auth: {
-            securityid: localStorage['username'],
-            financeid: data.finance,
+            financeid: localStorage['username'],
             password: data.password
         },
         userid: localStorage['username'],
@@ -95,13 +94,13 @@ const sendCommand = function (data, success, failure) {
             success(response.data.data);
         }
         else {
-            failure(response.data.data);
+            failure(response.data);
         }
     })
 }
 
 const revokeCommand = function (data, success, failure) {
-    axios.post(stockServer + 'instrequest', qs.stringify({
+    axios.post(stockServer + 'instrequest', JSON.stringify({
         auth: null,
         instid: data.commandID,
         userid: localStorage['username']
